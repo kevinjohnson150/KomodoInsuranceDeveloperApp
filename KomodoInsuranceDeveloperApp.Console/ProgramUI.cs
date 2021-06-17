@@ -85,7 +85,6 @@ namespace KomodoInsuranceDeveloperApp
                 Console.WriteLine("Please press any key to continue....");
                 Console.ReadKey();
                 Console.Clear();
-                Console.ReadLine();
             }
         }
 
@@ -161,7 +160,7 @@ namespace KomodoInsuranceDeveloperApp
             foreach(DevTeam devTeam in listOfDevTeams)
             {
                 Console.WriteLine($"Dev Team Name: {devTeam.TeamName}\n" +
-                    $"Dev Team ID: {devTeam.TeamIdentification}");
+                    $"Dev Team ID: {devTeam.TeamIdentification}\n");
             }
 
         }
@@ -171,7 +170,7 @@ namespace KomodoInsuranceDeveloperApp
             Console.Clear();
             ViewListOfTeams();
 
-            Console.WriteLine("Enter the DevTeam ID to see the developer's on that team:");
+            Console.WriteLine("\nEnter the DevTeam ID to see the developer's on that team:");
             string input = Console.ReadLine();
 
             DevTeam listOfDevsOnTeam = _devTeamRepo.GetNewDeveloperFromDevTeam(input);
