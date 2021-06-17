@@ -66,7 +66,18 @@ namespace KomodoInsuranceDeveloperApp.Library
             }
         }
 
-       
+        public List<Developer> DevelopersThatNeedPluralsight()
+        {
+            List < Developer > result = new List<Developer>() { };
+            foreach (Developer developer in _listOfDevelopers)
+            {
+                if (!developer.HasAccessToPluralsight)
+                {
+                    result.Add(developer);
+                }
+            }
+            return result;
+        }
 
         // Helper Method
         public Developer GetDeveloperByID(string oldDeveloper)

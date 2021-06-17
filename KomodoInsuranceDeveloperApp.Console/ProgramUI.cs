@@ -34,7 +34,8 @@ namespace KomodoInsuranceDeveloperApp
                     "6. Remove DevTeam \n" +
                     "7. Remove Developer From Team \n" +
                     "8. Add Developer To Team \n" +
-                    "9. Exit");
+                    "9. Developers That Need Pluralsight Access\n" +
+                    "10. Exit");
 
                 // User input
                 string input = Console.ReadLine();
@@ -74,6 +75,9 @@ namespace KomodoInsuranceDeveloperApp
                         AddDeveloperToTeam();
                         break;
                     case "9":
+                        DevelopersThatNeedPluralsight();
+                            break;
+                    case "10":
                         // Exit
                         Console.WriteLine("Have a great day!");
                         keepRunning = false;
@@ -147,7 +151,7 @@ namespace KomodoInsuranceDeveloperApp
             foreach(Developer developer in listOfDevelopers)
             {
                 Console.WriteLine($"Name: {developer.FirstName} {developer.LastName}\n" +
-                    $"Developer ID: {developer.DeveloperIdentification}");
+                    $"Developer ID: {developer.DeveloperIdentification}\n");
             }
         }
 
@@ -244,7 +248,18 @@ namespace KomodoInsuranceDeveloperApp
             _devTeamRepo.AddDeveloperToTeam(teamID, newDeveloper);
         }
 
-     
+        private void DevelopersThatNeedPluralsight()
+        {
+            Console.Clear();
+            List<Developer> listOfDevelopers = _developerRepo.DevelopersThatNeedPluralsight();
+
+            foreach (Developer developer in listOfDevelopers)
+            {
+                Console.WriteLine($"Name: {developer.FirstName} {developer.LastName}\n");
+            }
+
+        }
+
 
         //Seed Method
         private void SeedDeveloperAndTeamList()
