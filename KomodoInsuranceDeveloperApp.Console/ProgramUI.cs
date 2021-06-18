@@ -183,7 +183,7 @@ namespace KomodoInsuranceDeveloperApp
             {
                 Console.WriteLine($"Developer full name: {devTeam.FirstName} {devTeam.LastName}\n" +
                     $"Does developer has Pluralsight access: {devTeam.HasAccessToPluralsight}\n" +
-                    $"Devloper Identification Number: {devTeam.DeveloperIdentification}");
+                    $"Devloper Identification Number: {devTeam.DeveloperIdentification}\n");
             }
 
         }
@@ -233,29 +233,46 @@ namespace KomodoInsuranceDeveloperApp
         // Add developer to team
         private void AddDeveloperToTeam()
         {
-            Console.Clear();
-            Developer newDeveloper = new Developer();
-            
-            ViewListOfTeams();
-            ViewListOfDevelopers();
+            bool addDeveloper = true;
+            while (addDeveloper)
+            {
 
-            Console.WriteLine("Enter the developer's ID number you would like:");
-            string developerToLookup = Console.ReadLine();
-            newDeveloper = _developerRepo.GetDeveloperByID(developerToLookup);
+                Console.Clear();
+                Developer newDeveloper = new Developer();
 
-            Console.WriteLine("What team ID would you like to add the developer to?");
-            string teamID = Console.ReadLine();
-            _devTeamRepo.AddDeveloperToTeam(teamID, newDeveloper);
+                ViewListOfDevelopers();
+
+                Console.WriteLine("Enter the developer's ID number you would like:");
+                string developerToLookup = Console.ReadLine();
+                newDeveloper = _developerRepo.GetDeveloperByID(developerToLookup);
+
+                ViewListOfTeams();
+                Console.WriteLine("What team ID would you like to add the developer to?");
+                string teamID = Console.ReadLine();
+                _devTeamRepo.AddDeveloperToTeam(teamID, newDeveloper);
+
+                Console.WriteLine("Would you like to add another developer to a team? (y/n)");
+                string addAnotherDev = Console.ReadLine().ToLower();
+                if (addAnotherDev == "y")
+                {
+                    addDeveloper = true;
+                }
+                else
+                {
+                    addDeveloper = false;
+                }
+            }
         }
 
         private void DevelopersThatNeedPluralsight()
         {
             Console.Clear();
+            Console.WriteLine("List Of Developers That Need Access To Pluralsight:\n");
             List<Developer> listOfDevelopers = _developerRepo.DevelopersThatNeedPluralsight();
 
             foreach (Developer developer in listOfDevelopers)
             {
-                Console.WriteLine($"Name: {developer.FirstName} {developer.LastName}\n");
+                Console.WriteLine($"Name: {developer.FirstName} {developer.LastName} {developer.DeveloperIdentification}\n");
             }
 
         }
